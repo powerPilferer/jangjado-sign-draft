@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex,nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>장자도 장사 — 간판·사인 디자인 제안서 v1.1 (JAON 인태리)</title>
+<!--
+  ============================================================
+  이미지 경로는 아래 <script id="img-config"> 한 곳에만 있습니다.
+  시안을 바꿀 때: IMG.hero / IMG.close / IMG.far 세 줄과 ROUND만 고치면 됩니다. (현재 14라운드 A안 — 10-13 사장님 "일단 이정도로" 최종)
+  (img 태그의 src는 스크립트가 꺼졌을 때를 위한 같은 경로의 기본값입니다.)
+  경로는 장자도장사/ 폴더 기준. 상대경로(../)로 먼저 열고, 안 열리면 절대경로로 다시 엽니다.
+  ============================================================
+-->
+<script id="img-config">
+const ROUND = '14라운드 A안';
+const IMG = {
+  hero:    '간판시안/14라운드/jangjado-sign14-gate-A.jpg',            // 대표 투시도(전경) — 10-13 최종(일단) 14라운드 A
+  close:   '간판시안/14라운드/jangjado-sign14-gate-A-closeup.jpg',    // 근경 투시도 (크롭 835,345,1805,920 → 1380×818)
+  far:     '간판시안/14라운드/jangjado-sign14-gate-A-far300.jpg',     // 원거리 테스트 (전경 300px)
+  r9close: '간판시안/9라운드/jangjado-sign9-gate-A-closeup.jpg',      // 05-2장 비교용 — 배치 확정본 9라운드 A
+  site:    '친구컨셉/2-현장사진.jpg',
+  owner:   '친구컨셉/5-창업주선호간판.jpg',
+  sokcho:  '친구컨셉/8-사장님픽-속초시장게이트.jpg',
+  r6:      '간판시안/보관-게이트형/jangjado-sign6-gate-closeup.jpg',
+  sheet:   '캐릭터/4라운드/캐릭터시트-장사와조수.jpg',
+  poses:   '캐릭터/4라운드/표정포즈시트-장사와조수.jpg'
+};
+const REL = './';
+const ABS = 'file:///Users/mining/JAON/장자도장사/';
+</script>
+<style>
+:root{
+  --navy:#16346E; --blue:#2C6FB8; --mint:#4FB7B5; --foam:#EAF6FA;
+  --yellow:#F2C230; --coral:#D94A35; --brown:#C9822F; --thatch:#B39560;
+  --ink:#1D1F22; --paper:#FBF7EC; --cream:#F6EED8; --line:#E2D8C0; --mute:#857B68;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:#2b2a28;color:var(--ink);font-family:Pretendard,-apple-system,"Apple SD Gothic Neo","Noto Sans KR",sans-serif;-webkit-font-smoothing:antialiased}
+.deck{max-width:1600px;margin:0 auto;padding:28px 16px 60px;display:flex;flex-direction:column;gap:22px}
+.slide{position:relative;width:100%;aspect-ratio:16/9;background:var(--paper);overflow:hidden;container-type:inline-size;border-radius:6px;box-shadow:0 8px 30px rgba(0,0,0,.35)}
+.in{position:absolute;inset:0;padding:3.6cqw 4.6cqw 4.2cqw;display:flex;flex-direction:column}
+.kicker{font-size:.95cqw;letter-spacing:.22em;color:var(--coral);font-weight:800;text-transform:uppercase}
+h2{font-size:2.45cqw;line-height:1.25;margin:.5cqw 0 1.5cqw;font-weight:800;letter-spacing:-.025em}
+h3{font-size:1.3cqw;margin:0 0 .5cqw;font-weight:800;letter-spacing:-.01em}
+p,li{font-size:1.08cqw;line-height:1.58;margin:0 0 .5cqw}
+ul{margin:0;padding-left:1.3cqw}
+small,.s{font-size:.85cqw;color:var(--mute);line-height:1.5}
+b{font-weight:800}
+.foot{position:absolute;left:4.6cqw;right:4.6cqw;bottom:1.5cqw;display:flex;justify-content:space-between;font-size:.78cqw;color:#9c927c;letter-spacing:.04em}
+.foot .no{font-weight:800;color:var(--ink)}
+.grid{display:grid;gap:1.6cqw;flex:1;min-height:0}
+.g2{grid-template-columns:1fr 1fr}.g3{grid-template-columns:repeat(3,1fr)}.g4{grid-template-columns:repeat(4,1fr)}
+.g64{grid-template-columns:1.5fr 1fr}.g46{grid-template-columns:1fr 1.5fr}
+.card{background:#fff;border:1px solid var(--line);border-radius:.7cqw;padding:1.2cqw 1.3cqw;min-height:0}
+.fig{margin:0;display:flex;flex-direction:column;min-height:0}
+.fig img{width:100%;height:100%;object-fit:cover;border-radius:.5cqw;display:block;min-height:0;flex:1}
+.fig.contain img{object-fit:contain;background:#fff}
+.fig figcaption{font-size:.82cqw;color:var(--mute);margin-top:.45cqw;line-height:1.45}
+.tag{display:inline-block;font-size:.78cqw;font-weight:800;padding:.12cqw .55cqw;border-radius:.3cqw;background:var(--ink);color:#fff;letter-spacing:.03em;vertical-align:middle}
+.tag.y{background:var(--yellow);color:var(--ink)}.tag.c{background:var(--coral)}.tag.n{background:var(--navy)}.tag.g{background:#aaa}
+.est{color:var(--coral);font-weight:800}
+table{width:100%;border-collapse:collapse;background:#fff}
+th,td{font-size:.9cqw;line-height:1.45;padding:.48cqw .7cqw;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{background:var(--cream);font-weight:800;font-size:.85cqw}
+.lead{font-size:1.3cqw;line-height:1.55;font-weight:600}
+.note{border-left:.35cqw solid var(--yellow);background:#fff8de;padding:.8cqw 1.1cqw;font-size:.95cqw;line-height:1.55;border-radius:0 .4cqw .4cqw 0}
+.warn{border-left-color:var(--coral);background:#fdeeea}
+.num{font-size:3.4cqw;font-weight:900;color:var(--navy);line-height:1;letter-spacing:-.03em}
+svg text{font-family:Pretendard,-apple-system,"Apple SD Gothic Neo",sans-serif}
+/* 표지 */
+.cover{background:var(--navy)}
+.cover .bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.9}
+.cover .shade{position:absolute;inset:0;background:linear-gradient(90deg,rgba(14,30,66,.95) 0%,rgba(14,30,66,.82) 34%,rgba(14,30,66,0) 62%)}
+.cover .in{color:#fff;justify-content:space-between}
+.cover h1{font-size:5.2cqw;line-height:1.05;margin:0;font-weight:900;letter-spacing:-.04em}
+.cover .sub{font-size:1.6cqw;font-weight:700;margin-top:1.2cqw;color:var(--yellow)}
+.cover .meta{font-size:.95cqw;line-height:1.8;color:#d5dcea}
+.cover .meta b{color:#fff}
+/* 장 표지(구분) */
+.div{background:var(--navy);color:#fff}
+.div .in{justify-content:center}
+.div .big{font-size:6cqw;font-weight:900;color:var(--yellow);line-height:1}
+.div h2{font-size:3.4cqw;color:#fff}
+.chip{display:flex;flex-direction:column;border-radius:.6cqw;overflow:hidden;border:1px solid var(--line);background:#fff}
+.chip i{display:block;height:5.2cqw}
+.chip span{font-size:.82cqw;padding:.45cqw .6cqw;line-height:1.4}
+.pin{position:absolute;transform:translate(-50%,-50%);width:1.9cqw;height:1.9cqw;border-radius:50%;background:var(--coral);color:#fff;font-size:1.05cqw;font-weight:800;display:flex;align-items:center;justify-content:center;border:.15cqw solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.4)}
+.grid>table{align-self:start}
+a{color:var(--blue)}
+table.lg th,table.lg td{font-size:1.0cqw;padding:.68cqw .8cqw}
+@media print{body{background:#fff}.deck{padding:0;gap:0}.slide{box-shadow:none;border-radius:0;page-break-after:always}}
+</style>
+<style id="mobile">
+/* ============================================================
+   10-13 춘봉 · 폰(폭 700px 이하)에서는 16:9 장표를 세로 카드로 다시 짠다.
+   - 이 블록은 screen + max-width:700px 안에서만 산다. 넓은 화면·인쇄는 위 규칙 그대로.
+   - 글자 크기는 cqw(장표 폭 비례) 대신 px 고정: 본문 15 · 제목 22 · 표 13.5.
+   - 인라인 style(cqw)을 이기기 위해 !important 를 쓴다 — 마크업은 손대지 않는다.
+   ============================================================ */
+@media screen and (max-width:700px){
+  .deck{padding:12px 10px 40px;gap:14px}
+  .slide{aspect-ratio:auto;height:auto;min-height:0;border-radius:10px;box-shadow:0 4px 16px rgba(0,0,0,.35)}
+  .in{position:static;padding:20px 18px 16px}
+  .foot{position:static;margin-top:18px;padding-top:10px;border-top:1px solid var(--line);font-size:11px}
+  .div .foot,.cover .foot{border-top-color:rgba(255,255,255,.18)}
+  /* 타이포 — 인라인 cqw 전부 덮는다 */
+  .kicker{font-size:11px !important;letter-spacing:.18em}
+  h2{font-size:22px !important;line-height:1.3;margin:6px 0 14px !important}
+  h3{font-size:16px !important;margin:0 0 6px !important}
+  p,li,ul,.card,.lead{font-size:15px !important;line-height:1.6}
+  p{margin:0 0 8px !important}
+  ul{padding-left:18px}
+  small,.s,figcaption,.fig figcaption{font-size:12.5px !important;line-height:1.5}
+  .note{font-size:13.5px !important;line-height:1.55;padding:10px 12px;border-left-width:4px;border-radius:0 6px 6px 0}
+  th,td{font-size:13.5px !important;padding:7px 8px;overflow-wrap:anywhere}
+  th{font-size:12.5px !important}
+  table.lg th,table.lg td{font-size:13.5px !important;padding:7px 8px}
+  .tag{font-size:11px !important;padding:1px 6px;border-radius:4px}
+  .num{font-size:34px !important}
+  .card{border-radius:10px;padding:14px 16px}
+  .chip{border-radius:8px}.chip i{height:36px}.chip span{font-size:11.5px !important;padding:6px 8px}
+  .pin{width:21px;height:21px;font-size:12.5px;border-width:1.5px}
+  /* 그리드·칼럼 → 한 줄 쌓기 */
+  .grid{display:grid;grid-template-columns:1fr !important;gap:12px !important;flex:none !important;align-items:stretch !important}
+  .in div[style*="flex-direction:column"]{gap:12px !important}
+  .in [style*="margin-top"]{margin-top:14px !important}
+  .in h2[style*="margin-bottom"]{margin-bottom:20px !important}
+  .in p.s[style*="margin:"]{margin:10px 0 14px !important}
+  .fig{flex:none !important}
+  .fig img{height:auto !important;flex:none;border-radius:8px}
+  /* 00 표지 — 이미지 위, 남색 글판 아래 */
+  .cover{display:flex;flex-direction:column}
+  .cover .bg{position:static;width:100%;height:auto;opacity:1;order:0}
+  .cover .shade{display:none}
+  .cover .in{order:1;background:var(--navy)}
+  .cover .in > * + *{margin-top:18px}
+  .cover h1{font-size:32px !important;line-height:1.12}
+  .cover .sub{font-size:16px !important;margin-top:10px !important}
+  .cover .meta{font-size:13px !important;line-height:1.7}
+  /* 04 · 20 장 표지(남색) */
+  .div .big{font-size:40px !important}
+  .div h2{font-size:24px !important}
+  #s04 .grid + div{display:grid !important;grid-template-columns:1fr !important;gap:10px !important;padding-top:14px !important;margin-top:18px !important}
+  #s04 .grid > div{padding-bottom:4px}
+  #s04 h3{margin-top:4px !important}
+  #s20 img{height:auto !important;width:100% !important;border-radius:8px !important;margin:4px 0 18px}
+  #s20 .grid > div{font-size:13.5px !important;line-height:1.65}
+  /* 08 대표 투시도 — 제목, 이미지, 설명 순으로 세로 */
+  #s08{display:flex;flex-direction:column}
+  #s08 > img{position:static !important;width:100% !important;height:auto !important;order:1}
+  #s08 > div:first-of-type{position:static !important;order:0;padding:20px 18px 12px !important;background:none !important}
+  #s08 > div:nth-of-type(2){position:static !important;order:2;max-width:none !important;margin:14px 18px 0;padding:12px 14px !important;font-size:13.5px !important;border-radius:8px !important;color:var(--ink)}
+  #s08 h2{margin:6px 0 0 !important}
+  #s08 .foot{order:3;margin:18px 18px 0;padding-bottom:16px;border-top-color:rgba(255,255,255,.2)}
+  /* 09 근경 투시도 — 핀 좌표는 이미지 박스 % 라 그대로 맞는다 */
+  #s09 .card{padding:14px 16px !important}
+  #s09 .card p{font-size:14.5px !important;line-height:1.8}
+  #s09 .note{font-size:13px !important}
+  /* 10 · 11 도면 SVG — 폭 맞춤(세부 글자는 손가락 확대) */
+  #s10 .in > div:not(.foot){display:block !important;flex:none !important;min-height:0}
+  #s10 svg,#s11 svg{width:100% !important;height:auto !important;border-radius:6px}
+  /* 13 색 칩 9개 → 3열 */
+  #s13 .in > div[style*="repeat(9"]{grid-template-columns:repeat(3,1fr) !important;gap:8px !important}
+  /* 긴 표(05·07·12·17)는 행마다 카드로 — 머리글은 스크립트가 data-th 로 붙인다 */
+  #s05 table,#s07 table,#s12 table,#s17 table{display:block;margin-top:14px !important}
+  #s05 table tr,#s07 table tr,#s12 table tr,#s17 table tr{display:block;background:#fff;border:1px solid var(--line);border-radius:8px;padding:10px 12px 8px;margin-bottom:10px}
+  #s05 table tr:first-child,#s07 table tr:first-child,#s12 table tr:first-child,#s17 table tr:first-child{display:none}
+  #s05 table td,#s07 table td,#s12 table td,#s17 table td{display:block;border:0;padding:4px 0 6px;font-size:13.5px !important;line-height:1.5}
+  #s05 table td::before,#s07 table td::before,#s12 table td::before,#s17 table td::before{content:attr(data-th);display:block;font-size:10.5px;font-weight:800;letter-spacing:.06em;color:var(--mute);margin-bottom:1px}
+  #s05 table td:first-child,#s07 table td:first-child,#s17 table td:first-child{font-size:15px !important;font-weight:800;padding-bottom:6px;border-bottom:1px solid var(--line);margin-bottom:4px}
+  #s05 table td:first-child::before,#s07 table td:first-child::before,#s17 table td:first-child::before{display:none}
+  #s07 table td:first-child br{display:none}
+  #s07 table td:first-child b::after{content:" · ";font-weight:400;color:var(--mute)}
+  #s12 table td:nth-child(1),#s12 table td:nth-child(2){display:inline;font-size:15px !important;font-weight:800;padding:0;border:0}
+  #s12 table td:nth-child(1)::before,#s12 table td:nth-child(2)::before{display:none}
+  #s12 table td:nth-child(1){margin-right:4px}
+  #s12 table td:nth-child(3){margin-top:8px;padding-top:8px;border-top:1px solid var(--line)}
+  /* 14 · 15 숫자 표 — 치수·금액이 줄바꿈되지 않게 */
+  #s14 th,#s15 th{width:auto !important}
+  #s14 td:nth-child(2),#s14 td:nth-child(3),#s14 th:nth-child(3),#s15 td:nth-child(2),#s15 th:nth-child(2){white-space:nowrap}
+  /* 16 공정 · 19 요청서 — 인라인 큰 글자 정리 */
+  #s16 .card{border-top-width:4px !important}
+  #s16 .card h3{margin-top:6px !important}
+  #s16 .card p{line-height:1.7}
+  #s19 .card{line-height:1.7}
+  #s19 li{font-size:15px !important;line-height:1.7}
+}
+</style>
+</head>
+<body>
+<main class="deck">
+
+<!-- ===== 00 표지 ===== -->
+<section class="slide cover" id="s00">
+  <img class="bg" data-k="hero" src="./간판시안/14라운드/jangjado-sign14-gate-A.jpg" alt="대표 투시도">
+  <div class="shade"></div>
+  <div class="in">
+    <div class="kicker" style="color:var(--yellow)">Signage &amp; Character Design Proposal</div>
+    <div>
+      <h1>장자도 장사<br>간판·사인<br>디자인 제안서</h1>
+      <div class="sub">게이트형 입체 간판 + 캐릭터 '장사와 조수 둘'</div>
+    </div>
+    <div class="meta">
+      <b>현장</b> 군산시 옥도면 장자도 · 호떡마을 1호점 오른쪽 (현 '도깨비한과' 자리)<br>
+      <b>제안</b> JAON 인태리 (인테리어·사인 총괄) &nbsp;·&nbsp; <b>일자</b> 2026.10.13 &nbsp;·&nbsp; <b>판</b> v1.1 · 시안 <span data-round>14라운드 A안</span>(최종·일단) 기준<br>
+      <span style="color:#aab6cc">개략 설계안입니다. 모든 치수는 사진 비례 추정(≈)이며 실측·관청 확인·업체 견적 전입니다.</span>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 01 목차 ===== -->
+<section class="slide" id="s01"><div class="in">
+  <div class="kicker">Contents</div>
+  <h2>목차</h2>
+  <div class="grid g3" style="gap:1.2cqw 3cqw;align-content:start">
+    <div>
+      <h3 style="color:var(--coral)">Ⅰ. 이해</h3>
+      <p>02 프로젝트 개요와 범위<br>03 현장 분석<br>04 디자인 컨셉<br>05 디자인 발전 — 초안에서 게이트로<br>05-2 다듬기 — 9 → 14라운드</p>
+      <h3 style="color:var(--coral);margin-top:1.2cqw">Ⅱ. 캐릭터</h3>
+      <p>06 캐릭터 — 장사와 조수 둘<br>07 캐릭터를 간판에 올리는 법</p>
+    </div>
+    <div>
+      <h3 style="color:var(--coral)">Ⅲ. 디자인</h3>
+      <p>08 대표 투시도 (전경)<br>09 근경 투시도<br>10 정면 입면도 · 치수<br>11 측단면 · 고정 구조<br>12 사인 상세 사양<br>13 컬러 · 자재<br>14 원거리 가독성</p>
+    </div>
+    <div>
+      <h3 style="color:var(--coral)">Ⅳ. 실행</h3>
+      <p>15 개략 예산<br>16 공정 · 진행 순서<br>17 확인 필요 사항<br>18 다음 단계 — 내부 인테리어<br>19 업체 견적 요청서 (초안)<br>20 출처 · 문서 정보</p>
+      <div class="note" style="margin-top:1.4cqw">이 제안서는 <b>간판·사인과 캐릭터</b>까지입니다. 내부 인테리어는 아직 설계하지 않았고, 18장에 정할 것만 적었습니다.</div>
+    </div>
+  </div>
+  <div class="foot"><span>장자도 장사 · 간판·사인 디자인 제안서 v1.1</span><span>JAON 인태리 · <span class="no">01</span></span></div>
+</div></section>
+
+<!-- ===== 02 개요 ===== -->
+<section class="slide" id="s02"><div class="in">
+  <div class="kicker">Ⅰ · Project Overview</div>
+  <h2>이번에 정하는 것은 하나 — 멀리서 보이는 가게의 얼굴입니다</h2>
+  <div class="grid g2" style="align-items:start">
+    <div class="card">
+      <h3>가게</h3>
+      <table>
+        <tr><th style="width:24%">상호</th><td><b>장자도 장사</b> (메인, 잠정) · 수제철판요리 1호점 (서브)</td></tr>
+        <tr><th>메뉴</th><td>갑오징어 버터구이 한 가지 — 철판에서 바로 굽고 포장</td></tr>
+        <tr><th>자리</th><td>군산시 옥도면 장자도, 호떡마을 1호점 바로 오른쪽 (현 '도깨비한과' 자리)</td></tr>
+        <tr><th>건물</th><td>단층 가건물(컨테이너형으로 보임), 정면 전체가 열리는 유리문 — <span class="est">건축물 지위 확인 필요</span></td></tr>
+        <tr><th>손님</th><td>섬 관광객 — 주차장·호떡마을 쪽에서 걸어오며 가게를 고르는 사람</td></tr>
+      </table>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:1.2cqw">
+      <div class="card">
+        <h3><span class="tag y">이번 범위</span> 간판·사인 + 캐릭터</h3>
+        <ul>
+          <li>게이트 구조(노란 기둥 2개) · 물결 상호 띠 · 서브 띠</li>
+          <li>입체 상호 + 두 단어 사이 철판 판 · 지붕 위 캐릭터 판 3개 + '영차!' 말풍선</li>
+          <li>초가 처마 · 전구 줄 · 세로 메뉴판 · 입간판</li>
+          <li>캐릭터 '장사'와 조수 둘 (디자인 확정본)</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3><span class="tag g">범위 밖</span> 다음 단계로</h3>
+        <ul>
+          <li>내부 인테리어 · 조리 설비 배치 · 포장 동선 (18장)</li>
+          <li>메뉴판 내용 · 가격 · 포장 용기</li>
+        </ul>
+      </div>
+      <p class="s">진행: 인태리 설계 → 미지 합성 시안 → 인태리 검수. 9라운드 A안으로 배치를 정하고, 14라운드까지 상호·철판·서브 띠·조수 크기를 다듬어 10-13 최종(일단). 창업주가 처음 고른 초안 이미지(AI)를 출발점으로 삼았습니다.</p>
+    </div>
+  </div>
+  <div class="foot"><span>장자도 장사 · 간판·사인 디자인 제안서 v1.1</span><span>JAON 인태리 · <span class="no">02</span></span></div>
+</div></section>
+
+<!-- ===== 03 현장 분석 ===== -->
+<section class="slide" id="s03"><div class="in">
+  <div class="kicker">Ⅰ · Site Analysis</div>
+  <h2>이 거리에서 하늘이 비어 있는 곳은 우리 지붕 위뿐입니다</h2>
+  <div class="grid g64">
+    <figure class="fig"><img data-k="site" src="./친구컨셉/2-현장사진.jpg" alt="현장 사진">
+      <figcaption>현장 현재 모습 (도깨비한과 영업 중). 왼쪽 호떡마을 전광판, 오른쪽 보라 간판 사이가 우리 자리.</figcaption></figure>
+    <div style="display:flex;flex-direction:column;gap:.7cqw">
+      <div class="card"><h3>① 원색 과밀</h3><p>왼쪽은 대형 전광판·빨강 박스, 오른쪽은 보라. 크기·밝기·글자 수로 싸우면 묻힙니다 → <b>실루엣과 두께로 싸운다.</b></p></div>
+      <div class="card"><h3>② 빈 하늘</h3><p>호떡마을은 지붕 위까지 꽉 찼고 우리 지붕 위는 비어 있습니다 → <b>캐릭터를 하늘에 세운다.</b></p></div>
+      <div class="card"><h3>③ 전선</h3><p>전선이 왼쪽 위에서 내려와 <b>우리 지붕 오른쪽 모서리</b>에 물립니다(사진 추정) → 오른쪽엔 가장 낮은 요소를 둔다.</p></div>
+      <div class="card"><h3>④ 열린 정면</h3><p>정면 폭 <span class="est">≈6.5~6.8m</span>, 지붕선 <span class="est">≈3.0m</span>(사진 비례, 실측 전). 유리문을 열면 철판이 그대로 보여 <b>굽는 모습이 곧 간판</b>입니다.</p></div>
+    </div>
+  </div>
+  <div class="foot"><span>장자도 장사 · 간판·사인 디자인 제안서 v1.1</span><span>JAON 인태리 · <span class="no">03</span></span></div>
+</div></section>
+
+<!-- ===== 04 컨셉 ===== -->
+<section class="slide div" id="s04"><div class="in" style="justify-content:flex-start">
+  <div class="kicker" style="color:var(--yellow)">Ⅰ · Design Concept</div>
+  <h2 style="margin-bottom:2.2cqw">바닷가 시장 문 위에서<br>요리사 장사가 철판을 들고 "영차!"</h2>
+  <div class="grid g3" style="flex:0 0 auto;gap:2cqw">
+    <div><div class="big">01</div><h3 style="font-size:1.9cqw;margin-top:.8cqw;color:#fff">바다</h3><p style="color:#cfd8ea">세 겹 물결 띠가 상호를 받칩니다. 섬 가게라는 걸 색과 모양으로 먼저 말합니다.</p></div>
+    <div><div class="big">02</div><h3 style="font-size:1.9cqw;margin-top:.8cqw;color:#fff">철판</h3><p style="color:#cfd8ea">파는 음식을 글씨가 아니라 그림으로 — 상호 두 단어 사이에 버터 올린 갑오징어 철판, 그 뒤에 뒤집개 든 장사.</p></div>
+    <div><div class="big">03</div><h3 style="font-size:1.9cqw;margin-top:.8cqw;color:#fff">한 식구</h3><p style="color:#cfd8ea">장사 옆에 버터 조수·후추 조수. 가운데가 높고 양끝이 낮은 산 모양으로 한 덩어리로 읽힙니다.</p></div>
+  </div>
+  <div style="margin-top:auto;display:grid;grid-template-columns:repeat(3,1fr);gap:2cqw;border-top:1px solid rgba(255,255,255,.2);padding-top:1.4cqw">
+    <p style="color:#fff"><b style="color:var(--yellow)">문법</b> — 속초관광수산시장 게이트: 노란 기둥 + 물결 띠 + 띠 위에 선 캐릭터</p>
+    <p style="color:#fff"><b style="color:var(--yellow)">색</b> — 노랑(기둥·상호)과 바다 남색이 뼈대, 구운 갈색이 음식 쪽(상호 두께·서브 띠)</p>
+    <p style="color:#fff"><b style="color:var(--yellow)">재질</b> — 판을 오려 겹쳐 만든 두께. 진짜 짚·나무 대신 바닷가·화기에 견디는 재료</p>
+  </div>
+  <div class="foot" style="color:#7f8fb0"><span>장자도 장사 · 간판·사인 디자인 제안서 v1.1</span><span>JAON 인태리 · <span class="no" style="color:#fff">04</span></span></div>
+</div></section>
+
+<!-- ===== 05 디자인 발전 ===== -->
+<section class="slide" id="s05"><div class="in">
+  <div class="kicker">Ⅰ · Design Development</div>
+  <h2>창업주 초안의 인상 다섯 가지는 지키고, 재료와 고정 방법만 바꿨습니다</h2>
+  <div class="grid g3" style="flex:0 0 46%">
+    <figure class="fig"><img data-k="owner" src="./친구컨셉/5-창업주선호간판.jpg" alt="창업주 선호 초안"><figcaption><b>출발점</b> — 창업주가 고른 초안(AI 이미지). 판자·파도·큰 장사·초가·전구.</figcaption></figure>
+    <figure class="fig"><img data-k="sokcho" src="./친구컨셉/8-사장님픽-속초시장게이트.jpg" alt="속초관광수산시장 제2문"><figcaption><b>문법</b> — 속초관광수산시장 제2문(실물). 같은 구성이 실제로 서 있다는 근거.</figcaption></figure>
+    <figure class="fig"><img data-k="close" src="./간판시안/14라운드/jangjado-sign14-gate-A-closeup.jpg" alt="현재안"><figcaption><b>현재안</b> — <span data-round>14라운드 A안</span> 게이트형. 확정 캐릭터를 입힌 판.</figcaption></figure>
+  </div>
+  <table style="margin-top:1.2cqw">
+    <tr><th style="width:16%">초안의 인상</th><th style="width:30%">현재안에서</th><th>왜 바꿨나</th></tr>
+    <tr><td>나무 판자 상호</td><td>세 겹 물결 띠 위로 솟은 입체 상호 (노랑 면 · 갈색 두께 · 남색 키라인)</td><td>지붕 위 큰 판자는 바람·하중이 크고, 파도와 상호를 한 판으로 묶으면 요소가 줄어 멀리서 또렷함</td></tr>
+    <tr><td>솟구치는 파도</td><td>물결 3겹 + 겹 사이 띄움 ≈2~3cm</td><td>떠 있는 물보라 조각은 판으로 자를 수 없음 → 띠 안에 두께로</td></tr>
+    <tr><td>거대한 장사</td><td>장사 + 조수 둘, 허리 아래는 띠 뒤</td><td>숨는 부분이 곧 고정 자리. 꼭대기를 지붕선 +1.3m 안으로</td></tr>
+    <tr><td>초가 처마</td><td>인조 초가 처마 (기둥 사이 안쪽)</td><td>진짜 짚은 철판 화기·바닷바람에 약함 → 방염 인조 제품 (성적서 확인 필요)</td></tr>
+    <tr><td>전구 줄</td><td>처마 아래 옥외 LED 전구 줄</td><td>그대로. 전용 회로·누전차단기는 전기업체 확인</td></tr>
+  </table>
+  <div class="foot"><span>장자도 장사 · 간판·사인 디자인 제안서 v1.1</span><span>JAON 인태리 · <span class="no">05</span></span></div>
+</div></section>
+
+<!-- ===== 05-2 디자인 발전 ② 9→14라운드 (10-13 추가) ===== -->
+<section class="slide" id="s05b"><div class="in">
+  <div class="kicker">Ⅰ · Design Development ② — Round 9 → 14</div>
+  <h2>배치는 9라운드 그대로 두고, 글자·철판·서브 띠를 '음식 간판'답게 다듬었습니다</h2>
+  <div class="grid" style="grid-template-columns:1fr 1fr 1.15fr;align-items:start">
+    <figure class="fig" style="justify-content:flex-start"><img data-k="r9close" src="./간판시안/9라운드/jangjado-sign9-gate-A-closeup.jpg" alt="9라운드 A안 근경" style="height:auto;aspect-ratio:1380/818"><figcaption><b>9라운드 A</b> — 배치 확정본. 흰 상호가 띠 안에 갇혀 있고, 철판은 장사 가슴 앞, 서브 띠는 검정.</figcaption></figure>
+    <figure class="fig" style="justify-content:flex-start"><img data-k="close" src="./간판시안/14라운드/jangjado-sign14-gate-A-closeup.jpg" alt="14라운드 A안 근경" style="height:auto;aspect-ratio:1380/818"><figcaption><b>14라운드 A</b> — 최종(일단). 노란 입체 상호가 띠 위로 솟고, 철판이 상호 두 단어 사이 같은 깊이로, 서브 띠는 구운 갈색.</figcaption></figure>
+    <table>
+      <tr><th style="width:15%">라운드</th><th>바꾼 것</th></tr>
+      <tr><td>10</td><td>상호·서브 문구에 입체 두께 — "너무 노멀하고 잘 안 보인다"</td></tr>
+      <tr><td>11</td><td>상호 글꼴 3종 비교 → <b>페이퍼로지 9 Black</b> · 서브 띠 검정 → <b>구운 갈색</b></td></tr>
+      <tr><td>12</td><td>상호를 띠 위로 <b>+20% 돌출</b> · 노랑 면 + 짙은 갈색→에스프레소 두께 + <b>남색 키라인</b> · 서브 글자 페이퍼로지 7 Bold 버터 노랑</td></tr>
+      <tr><td>13</td><td>철판을 장사 판에서 떼어 <b>상호와 같은 깊이의 맨 앞 판</b>으로 '장자도'와 '장사' 사이에 · 조수를 기둥 위에 올려 보는 실험</td></tr>
+      <tr><td>14</td><td>조수는 띠 위 원래 자리로(대칭, <b>+15%</b> 유지) · 철판 조금 위로 · 단어와 철판 간격 좁혀 묶음을 띠 가운데로</td></tr>
+    </table>
+  </div>
+  <div class="note" style="margin-top:1.2cqw">그대로 둔 것: 게이트 구조 · 물결 띠 · 장사 자리와 크기 · 꼬리 없는 '영차!' 원 · 그림 방향. <b>지붕선 위 꼭대기(장사 뒤집개)는 9라운드와 같은 높이</b>이고, 조수 꼭대기가 ≈0.13m 올라왔습니다(10장).</div>
+  <div class="foot"><span>장자도 장사 · 간판·사인 디자인 제안서 v1.1</span><span>JAON 인태리 · <span class="no">05-2</span></span></div>
+</div></section>
+
+<!-- ===== 06 캐릭터 ===== -->
+<section class="slide" id="s06"><div class="in">
+  <div class="kicker">Ⅱ · Character</div>
+  <h2>가게의 얼굴 — 요리사 '장사'와 갑오징어 조수 둘</h2>
+  <figure class="fig contain" style="flex:0 0 48%"><img data-k="sheet" src="./캐릭터/4라운드/캐릭터시트-장사와조수.jpg" alt="캐릭터 시트" style="object-fit:contain;background:#F6EED8"></figure>
+  <div class="grid g3" style="margin-top:1.3cqw;flex:0 0 auto">
+    <div class="card"><h3>장사 <span class="tag c">주인공</span></h3><p>빨간 꼬임 머리띠 · 흰 티 · 목 수건 · 남색 앞치마 · 장화 · 뒤집개. 철판 앞의 사장님. 간판에선 <b>가운데, 가장 높게</b>.</p></div>
+    <div class="card"><h3>버터 조수 <span class="tag n">큰 조수</span></h3><p>버터 접시를 든 갑오징어. 흰 동그라미 눈. 간판에선 <b>왼쪽</b>, 버터가 바깥(기둥 쪽)을 향함.</p></div>
+    <div class="card"><h3>후추 조수 <span class="tag n">작은 조수</span></h3><p>후추통을 든 작은 갑오징어. 꼬리 촉완이 길게. 간판에선 <b>오른쪽</b> — 버터 조수와 <b>같은 크기로 좌우 대칭</b>.</p></div>
+  </div>
+  <p class="s" style="margin-top:1cqw">확정본: 캐릭터/4라운드 시트(2라운드 '안1' 원본). 간판·메뉴판·포장에 쓸 때 <b>선·색·비율·표정은 고치지 않습니다</b> — 포즈 고르기·크기·흰 테두리로만 맞춥니다. 캐릭터 이름을 가게 이름과 같은 '장사'로 부를지는 결정 대기.</p>
+  <div class="foot"><span>장자도 장사 · 간판·사인 디자인 제안서 v1.1</span><span>JAON 인태리 · <span class="no">06</span></span></div>
+</div></section>
+
+<!-- ===== 07 캐릭터 적용 ===== -->
+<section class="slide" id="s07"><div class="in">
+  <div class="kicker">Ⅱ · Character on Sign</div>
+  <h2>그림은 그대로, 포즈와 자리만 골라 간판에 올립니다</h2>
+  <div class="grid g2" style="align-items:start">
+    <div style="display:flex;flex-direction:column;gap:1cqw;min-height:0">
+      <figure class="fig contain"><img data-k="poses" src="./캐릭터/4라운드/표정포즈시트-장사와조수.jpg" alt="표정 포즈 시트" style="height:auto;object-fit:contain;background:#F6EED8"><figcaption>표정·포즈 시트 11개 중 간판용 3개를 골랐습니다. 나머지(엄지척·조리·뿌듯 등)는 메뉴판·포장·스티커 후보.</figcaption></figure>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:1cqw">
+      <table>
+        <tr><th style="width:17%">자리</th><th style="width:28%">포즈</th><th>고른 이유</th></tr>
+        <tr><td><b>가운데</b><br>장사</td><td>뒤집개 든 기본 포즈 · 허리 아래는 띠 뒤</td><td>멀리서 "뒤집개 든 요리사" 실루엣. 허리 위에서 끝나는 포즈라 띠에 숨겨도 안 잘림</td></tr>
+        <tr><td><b>왼쪽</b><br>버터 조수</td><td>버터 내밈 · 띠 윗변에 섬</td><td>노란 버터가 몸 밖으로 나가 타원 실루엣을 깸</td></tr>
+        <tr><td><b>오른쪽</b><br>후추 조수</td><td>후추 흔들기 · 시트 정면 얼굴(흰 동그라미 눈) · 버터 조수와 같은 크기, 좌우 대칭 자리</td><td>감은 눈은 멀리서 얼굴이 사라짐 → 흰자위 있는 정면 얼굴. 다리·꼬리를 다 보여야 "도토리"가 안 됨</td></tr>
+        <tr><td><b>상호 사이</b><br>철판 · 말풍선</td><td>버터 올린 갑오징어 철판 — 상호 '장자도'와 '장사' 사이, 상호와 같은 깊이의 맨 앞 판 · 꼬리 없는 노란 원 '영차!'(장사 오른쪽 위)</td><td>파는 음식을 그림으로, 상호 한가운데에. 장사가 철판 뒤에 선 요리사로 읽힘. 말풍선은 상호와 모양을 달리해 구호로</td></tr>
+      </table>
+      <div class="card" style="background:var(--cream)">
+        <h3>디자인을 안 고치고 쓰는 손잡이 넷</h3>
+        <p>① 포즈 고르기 ② 띠 뒤로 숨길 높이 ③ 흰 외곽 테두리(≈40~50mm, 한 덩어리로 자르기 위해) ④ 좌우 자리(든 물건이 바깥을 향하게) — 판 크기 <b>장사 ≈1.4×1.1m : 조수 각 ≈1.0×1.0m</b>(14라운드에서 조수 +15%). 키는 거의 같아졌고, 장사는 <b>폭·가운데 자리·뒤집개</b>로 가장 크게 읽힙니다. 조수 둘은 같은 크기로 좌우 대칭, 그림 방향은 시트 원본 그대로.</p>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><span>장자도 장사 · 간판·사인 디자인 제안서 v1.1</span><span>JAON 인태리 · <span class="no">07</span></span></div>
+</div></section>
+
+<!-- ===== 08 대표 투시도 ===== -->
+<section class="slide" id="s08" style="background:#000">
+  <img data-k="hero" src="./간판시안/14라운드/jangjado-sign14-gate-A.jpg" alt="대표 투시도" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
+  <div style="position:absolute;left:0;right:0;top:0;padding:2.6cqw 4.6cqw 5cqw;background:linear-gradient(180deg,rgba(0,0,0,.6),rgba(0,0,0,0));color:#fff">
+    <div class="kicker" style="color:var(--yellow)">Ⅲ · Perspective — Street View · <span data-round>14라운드 A안</span></div>
+    <h2 style="color:#fff;margin:.4cqw 0 0">주차장 쪽에서 걸어오면, 하늘에 세 식구가 먼저 보입니다</h2>
+  </div>
+  <div style="position:absolute;left:4.6cqw;bottom:2.4cqw;max-width:44cqw;background:rgba(255,255,255,.93);padding:1cqw 1.3cqw;border-radius:.5cqw;font-size:.92cqw;line-height:1.55">
+    <b>대표 투시도 (합성 시안)</b> — 현장 사진 위에 간판을 합성한 이미지입니다.<br>
+    <span class="est">합성에서 지붕 위 전선은 지웠습니다.</span> 실제로는 전선이 오른쪽 지붕 모서리로 지나갑니다(17장).
+  </div>
+  <div class="foot" style="color:#eee;bottom:1.2cqw"><span></span><span>JAON 인태리 · <span class="no" style="color:#fff">08</span></span></div>
+</section>
+
+<!-- ===== 09 근경 투시도 ===== -->
+<section class="slide" id="s09"><div class="in">
+  <div class="kicker">Ⅲ · Perspective — Front · <span data-round>14라운드 A안</span></div>
+  <h2>가까이 오면 상호 → 메뉴 → 굽는 모습 순서로 읽힙니다</h2>
+  <div class="grid" style="grid-template-columns:1.75fr 1fr">
+    <figure class="fig" style="justify-content:flex-start"><div style="position:relative;width:100%;aspect-ratio:1380/818"><img data-k="close" src="./간판시안/14라운드/jangjado-sign14-gate-A-closeup.jpg" alt="근경 투시도" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"><span class="pin" style="left:15.1%;top:60.5%">①</span><span class="pin" style="left:20.6%;top:36.3%">②</span><span class="pin" style="left:35.2%;top:33.6%">③</span><span class="pin" style="left:35.6%;top:45.9%">④</span><span class="pin" style="left:23.2%;top:16.5%">⑤</span><span class="pin" style="left:44.0%;top:14.4%">⑤</span><span class="pin" style="left:79.1%;top:16.5%">⑤</span><span class="pin" style="left:49.2%;top:29.0%">⑥</span><span class="pin" style="left:61.5%;top:19.7%">⑥</span><span class="pin" style="left:69.9%;top:51.0%">⑦</span><span class="pin" style="left:75.5%;top:55.7%">⑧</span><span class="pin" style="left:20.1%;top:71.0%">⑨</span><span class="pin" style="left:89.3%;top:75.7%">⑩</span></div><figcaption>근경 합성 시안(<span data-round>14라운드 A안</span>). 번호 = 12장 사양표 번호. 전선은 지운 상태입니다.</figcaption></figure>
+    <div class="card" style="padding:1.1cqw 1.3cqw">
+      <h3>구성 요소</h3>
+      <p style="font-size:.98cqw;line-height:1.75;margin:0">
+      <b>①</b> 노란 게이트 기둥 2개 (땅~ㄱ자)<br>
+      <b>②</b> 물결 상호 띠 (3겹)<br>
+      <b>③</b> 입체 상호 "장자도 장사"<br>
+      <b>④</b> 서브 띠 "수제철판요리 1호점 · 갑오징어 버터구이"<br>
+      <b>⑤</b> 캐릭터 판 — 장사 · 버터 조수 · 후추 조수<br>
+      <b>⑥</b> 철판 판 · '영차!' 말풍선<br>
+      <b>⑦</b> 인조 초가 처마<br>
+      <b>⑧</b> LED 전구 줄<br>
+      <b>⑨</b> 왼쪽 세로 메뉴판<br>
+      <b>⑩</b> 오른쪽 메뉴 입간판 (구명튜브)</p>
+      <div class="note" style="margin-top:1cqw;font-size:.88cqw">손님이 읽는 순서: 웃는 요리사와 친구 둘(멀리) → 장자도 장사 → 갑오징어 버터구이(다가오며) → 메뉴판 사진 · 철판 연기(앞에서)</div>
+    </div>
+  </div>
+  <div class="foot"><span>장자도 장사 · 간판·사인 디자인 제안서 v1.1</span><span>JAON 인태리 · <span class="no">09</span></span></div>
+</div></section>
+
+<!-- ===== 10 정면 입면도 ===== -->
+<section class="slide" id="s10"><div class="in">
+  <div class="kicker">Ⅲ · Front Elevation</div>
+  <h2>정면 입면도 — 꼭대기는 지붕선 ≈+1.3m, 설계 상한선에 닿아 있습니다</h2>
+  <div style="flex:1;min-height:0;display:flex;gap:1.4cqw">
+  <svg viewBox="0 0 1100 600" style="flex:1;height:100%;background:#fff;border:1px solid var(--line);border-radius:.5cqw" xmlns="http://www.w3.org/2000/svg">
+    <defs><pattern id="hatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="8" stroke="#ccc" stroke-width="2"/></pattern></defs>
+    <!-- 땅 -->
+    <rect x="0" y="540" width="1100" height="60" fill="url(#hatch)"/><line x1="0" y1="540" x2="1100" y2="540" stroke="#333" stroke-width="2"/>
+    <!-- 기준선 -->
+    <line x1="20" y1="60" x2="1000" y2="60" stroke="#aaa" stroke-dasharray="3 5"/><text x="22" y="54" font-size="12" fill="#999">참고 +1.8m — 타 지자체 옥상간판 예시 (군산·전북 기준 미확인)</text>
+    <line x1="20" y1="110" x2="1000" y2="110" stroke="#D94A35" stroke-dasharray="7 4"/><text x="22" y="104" font-size="12" fill="#D94A35" font-weight="700">설계 상한 지붕선 +1.3m</text>
+    <line x1="20" y1="240" x2="1000" y2="240" stroke="#777" stroke-dasharray="2 3"/><text x="66" y="234" font-size="12" fill="#666">지붕선 ≈3.0m</text>
+    <!-- 이웃 -->
+    <rect x="0" y="150" width="60" height="390" fill="#efefef" stroke="#bbb"/><text x="6" y="440" font-size="11" fill="#888">호떡</text><text x="6" y="455" font-size="11" fill="#888">마을</text>
+    <rect x="860" y="250" width="170" height="48" fill="#e9e0f3" stroke="#a58cc6"/><text x="884" y="279" font-size="12" fill="#6a3fa0">옆 가게 간판(기둥 뒤)</text>
+    <!-- 전선 -->
+    <line x1="560" y1="8" x2="868" y2="240" stroke="#555" stroke-width="1.6" stroke-dasharray="10 6" opacity=".6"/>
+    <text x="700" y="80" font-size="12" fill="#555">전선 (현장 사진 기준 개략 · 시안에선 지움)</text>
+    <!-- 컨테이너 정면 -->
+    <rect x="180" y="240" width="660" height="300" fill="#f7f7f5" stroke="#aaa"/>
+    <rect x="232" y="352" width="566" height="188" fill="#fff" stroke="#bbb"/>
+    <line x1="400" y1="352" x2="400" y2="540" stroke="#ccc"/><line x1="620" y1="352" x2="620" y2="540" stroke="#ccc"/>
+    <rect x="282" y="455" width="476" height="58" fill="#dde0e3" stroke="#999"/><text x="440" y="489" font-size="12" fill="#555">기존 스텐 조리대 (실측 필요)</text>
+    <!-- ⑨ 메뉴판 -->
+    <rect x="186" y="362" width="40" height="150" fill="#2b2b2b"/><text x="191" y="384" font-size="10" fill="#F2C230" font-weight="700">메뉴</text>
+    <!-- ⑦ 초가 / ④ 서브 띠 / ② 물결 띠 -->
+    <rect x="170" y="307" width="680" height="35" fill="#cdb58a" stroke="#a48a56"/>
+    <rect x="170" y="285" width="680" height="22" fill="#7C401A"/>
+    <text x="510" y="300" font-size="11" fill="#FFD654" font-weight="700" text-anchor="middle">수제철판요리 1호점 · 갑오징어 버터구이</text>
+    <rect x="170" y="215" width="680" height="70" fill="#2C6FB8" stroke="#16346E" stroke-width="2"/>
+    <path d="M170,240 q21,-10 42,0 t42,0 t42,0 t42,0 t42,0 t42,0 t42,0 t42,0 t42,0 t42,0 t42,0 t42,0 t42,0 t42,0 t42,0 t42,0 t8,0 L850,262 L170,262 Z" fill="#4FB7B5" opacity=".85"/>
+    <path d="M170,262 q21,-9 42,0 t42,0 t42,0 t42,0 t42,0 t42,0 t42,0 t42,0 t42,0 t42,0 t42,0 t42,0 t42,0 t42,0 t42,0 t42,0 t8,0 L850,285 L170,285 Z" fill="#EAF6FA" opacity=".9"/>
+    <!-- 캐릭터 영역 (점선 = 판 외곽, 그림은 시트 원본) — 14라운드 A 근경 실측 비례 -->
+    <g fill="rgba(201,130,47,.12)" stroke="#C9822F" stroke-width="2" stroke-dasharray="6 4">
+      <rect x="240" y="117" width="97" height="101" rx="18"/>
+      <rect x="427" y="110" width="140" height="110" rx="18"/>
+      <circle cx="582" cy="158" r="27"/>
+      <rect x="680" y="117" width="104" height="101" rx="18"/>
+    </g>
+    <g font-size="11" fill="#7a4a12" font-weight="700" text-anchor="middle">
+      <text x="288" y="160">버터 조수</text><text x="288" y="174" font-weight="400">≈1.0×1.0m</text>
+      <text x="480" y="138">장사</text><text x="480" y="152" font-weight="400">≈1.4×1.1m</text>
+      <text x="582" y="156">영차!</text><text x="582" y="169" font-weight="400">≈Ø0.55</text>
+      <text x="732" y="160">후추 조수</text><text x="732" y="174" font-weight="400">≈1.0×1.0m</text>
+    </g>
+    <!-- ③ 입체 상호 (노랑 면 · 갈색 두께 · 남색 키라인) + ⑥ 철판 판 — 같은 깊이의 맨 앞 판 -->
+    <g font-weight="900" font-size="74" paint-order="stroke" stroke-linejoin="round">
+      <text x="252" y="275" textLength="212" lengthAdjust="spacingAndGlyphs" fill="#562B10" stroke="#09255B" stroke-width="7" transform="translate(4,4)">장자도</text>
+      <text x="252" y="275" textLength="212" lengthAdjust="spacingAndGlyphs" fill="#FFCC26" stroke="#562B10" stroke-width="2.5">장자도</text>
+      <text x="624" y="275" textLength="146" lengthAdjust="spacingAndGlyphs" fill="#562B10" stroke="#09255B" stroke-width="7" transform="translate(4,4)">장사</text>
+      <text x="624" y="275" textLength="146" lengthAdjust="spacingAndGlyphs" fill="#FFCC26" stroke="#562B10" stroke-width="2.5">장사</text>
+    </g>
+    <rect x="476" y="198" width="140" height="70" rx="22" fill="#2a2a2a" stroke="#09255B" stroke-width="3"/>
+    <rect x="480" y="202" width="140" height="70" rx="22" fill="none" stroke="#562B10" stroke-width="3" opacity=".7"/>
+    <ellipse cx="546" cy="232" rx="44" ry="16" fill="#C9822F"/><rect x="536" y="222" width="18" height="12" rx="2" fill="#FFD654"/>
+    <text x="546" y="262" font-size="10" fill="#fff" text-anchor="middle" font-weight="700">철판 ≈1.4×0.65</text>
+    <!-- ① 기둥 -->
+    <rect x="150" y="140" width="20" height="400" fill="#F2C230" stroke="#9c7a10"/><rect x="150" y="140" width="80" height="16" fill="#F2C230" stroke="#9c7a10"/>
+    <rect x="850" y="140" width="20" height="400" fill="#F2C230" stroke="#9c7a10"/><rect x="790" y="140" width="80" height="16" fill="#F2C230" stroke="#9c7a10"/>
+    <!-- ⑩ 입간판 -->
+    <rect x="884" y="408" width="62" height="132" fill="#2b2b2b"/><circle cx="915" cy="510" r="11" fill="none" stroke="#D94A35" stroke-width="5"/>
+    <!-- 번호 -->
+    <g font-size="12" font-weight="800" fill="#fff">
+      <circle cx="160" cy="400" r="10" fill="#D94A35"/><text x="156" y="404">1</text>
+      <circle cx="190" cy="228" r="10" fill="#D94A35"/><text x="186" y="232">2</text>
+      <circle cx="378" cy="196" r="10" fill="#D94A35"/><text x="374" y="200">3</text>
+      <circle cx="190" cy="296" r="10" fill="#D94A35"/><text x="186" y="300">4</text>
+      <circle cx="248" cy="134" r="10" fill="#D94A35"/><text x="244" y="138">5</text>
+      <circle cx="628" cy="200" r="10" fill="#D94A35"/><text x="624" y="204">6</text>
+      <circle cx="830" cy="325" r="10" fill="#D94A35"/><text x="826" y="329">7</text>
+      <circle cx="770" cy="352" r="10" fill="#D94A35"/><text x="766" y="356">8</text>
+      <circle cx="206" cy="440" r="10" fill="#D94A35"/><text x="202" y="444">9</text>
+      <circle cx="915" cy="440" r="10" fill="#D94A35"/><text x="907" y="444">10</text>
+    </g>
+    <!-- 전구 줄 -->
+    <path d="M232,346 q47,12 94,0 t94,0 t94,0 t94,0 t94,0 t94,0" fill="none" stroke="#c9a400" stroke-width="1.5"/>
+    <!-- 치수 -->
+    <g font-size="12" fill="#222">
+      <line x1="170" y1="565" x2="850" y2="565" stroke="#333"/><line x1="170" y1="558" x2="170" y2="572" stroke="#333"/><line x1="850" y1="558" x2="850" y2="572" stroke="#333"/>
+      <text x="510" y="588" text-anchor="middle" fill="#D94A35" font-weight="700">물결 띠 ≈6.8m (기둥 안쪽 끝~끝 · 실측 필요)</text>
+      <line x1="1010" y1="540" x2="1010" y2="240" stroke="#333"/><text x="1016" y="395">≈3.0m</text>
+      <line x1="1010" y1="240" x2="1010" y2="140" stroke="#333"/><text x="1016" y="195">기둥 ≈+1.0</text>
+      <line x1="1085" y1="240" x2="1085" y2="110" stroke="#D94A35"/><text x="1030" y="100" fill="#D94A35" font-weight="700">꼭대기 ≈+1.3~1.4</text><text x="1030" y="128" fill="#7a4a12" font-size="11">조수 ≈+1.27</text>
+      <line x1="120" y1="215" x2="140" y2="215" stroke="#333"/><line x1="130" y1="215" x2="130" y2="285" stroke="#333"/><text x="72" y="257">띠 ≈0.7</text><text x="64" y="271" font-size="10" fill="#7a4a12">상호 글자 ≈0.68</text><text x="64" y="283" font-size="10" fill="#7a4a12">(띠 위 ≈+0.08)</text>
+      <text x="64" y="300">서브 ≈0.22</text><text x="64" y="330">처마 ≈0.35</text>
+    </g>
+    <text x="180" y="28" font-size="11" fill="#999">축척 100px = 1m · 치수 전부 14라운드 A 합성 비례 추정(≈, 띠 6.8m 잣대) · 캐릭터는 점선 외곽만(그림은 시트 원본) · 상호 묶음 ≈5.3m(장자도 ≈2.2 · 철판 ≈1.4 · 장사 ≈1.5)</text>
+  </svg>
+  </div>
+  <div class="foot"><span>장자도 장사 · 간판·사인 디자인 제안서 v1.1</span><span>JAON 인태리 · <span class="no">10</span></span></div>
+</div></section>
+
+<!-- ===== 11 측단면 · 구조 ===== -->
+<section class="slide" id="s11"><div class="in">
+  <div class="kicker">Ⅲ · Section &amp; Structure</div>
+  <h2>지붕에는 구멍을 내지 않습니다 — 띠 뒤 틀과 기둥 사이 가로대 두 점에 고정</h2>
+  <div class="grid g2">
+    <svg viewBox="0 0 520 330" style="width:100%;height:100%;background:#fff;border:1px solid var(--line);border-radius:.5cqw" xmlns="http://www.w3.org/2000/svg" font-size="11">
+      <text x="12" y="20" font-weight="700" font-size="12">옆 단면 (왼쪽 = 길 쪽) · 깊이 방향 과장 · 개략</text>
+      <rect x="300" y="190" width="200" height="12" fill="#999"/><text x="400" y="184">지붕 (구멍 없음)</text>
+      <rect x="290" y="150" width="14" height="170" fill="#bbb"/><text x="310" y="268">컨테이너 정면 보</text>
+      <rect x="250" y="120" width="8" height="110" fill="#16346E"/>
+      <rect x="232" y="135" width="8" height="95" fill="#2C6FB8"/>
+      <rect x="214" y="150" width="8" height="80" fill="#EAF6FA" stroke="#7aa"/>
+      <rect x="258" y="120" width="32" height="110" fill="none" stroke="#555" stroke-dasharray="3 2"/>
+      <text x="40" y="250">물결 3겹, 겹 사이 띄움 ≈2~3cm</text>
+      <text x="40" y="264">띠 전체 깊이 ≈10cm · 양끝 측면판 먹색</text>
+      <text x="330" y="150">② 기둥 사이 뒤 가로대</text><text x="330" y="232">① 띠 뒤 각파이프 틀 → 정면 보</text>
+      <rect x="268" y="30" width="6" height="140" fill="#C9822F"/>
+      <rect x="274" y="30" width="10" height="140" fill="#222"/>
+      <text x="40" y="45">캐릭터 판: 앞판 + 측면 ≈5cm(먹색)</text>
+      <text x="40" y="59">아래쪽은 띠 뒤로 내려가 숨음</text>
+      <rect x="286" y="40" width="6" height="190" fill="#666"/>
+      <text x="300" y="60">세로 지지대(각파이프) 2개/캐릭터</text>
+      <text x="300" y="74">→ ① 띠 틀 + ② 뒤 가로대</text>
+      <text x="300" y="88">두 점 고정, 지붕엔 하중 안 줌</text>
+      <rect x="294" y="133" width="14" height="14" fill="#555"/><circle cx="289" cy="140" r="4" fill="#D94A35"/><circle cx="289" cy="215" r="4" fill="#D94A35"/>
+      <text x="40" y="298" fill="#D94A35">● 체결: 스텐 볼트 + 이종금속 절연 (바닷가)</text>
+      <text x="40" y="314" fill="#777">바람 하중·부재 규격은 업체 구조 검토</text>
+    </svg>
+    <div style="display:flex;flex-direction:column;gap:1cqw">
+      <div class="card"><h3>왜 이렇게 고정하나</h3><p>건물이 가설건축물인지 아직 모릅니다. 지붕에 구멍·하중을 주지 않으면 <b>분류가 어떻게 나와도 되돌리기 쉽고</b>, 임대 종료 때 원상복구도 가볍습니다.</p></div>
+      <div class="card"><h3>기둥</h3><p>노란 기둥은 땅에서 ㄱ자 윗끝까지 끊김 없이. 새 기초를 파는 대신 <b>기존 모서리 기둥을 노랑 커버로 감싸는 안</b>을 먼저 검토합니다(경계 침범 없음). 기존 기둥이 받을 수 있는지는 업체 구조 확인.</p></div>
+      <div class="card"><h3>바닷가 내구</h3><p>체결부(볼트·브래킷)부터 썩습니다 → 스텐 체결, 알루미늄과 철 사이 절연 와셔. 캐릭터 판은 떼었다 다는 모듈로 — 태풍 때 판만 내릴 수 있게.</p></div>
+      <div class="note warn">바람 하중은 계산하지 않았습니다. 면적이 큰 판(물결 띠 ≈4.8㎡)은 업체 구조 검토가 필수입니다.</div>
+    </div>
+  </div>
+  <div class="foot"><span>장자도 장사 · 간판·사인 디자인 제안서 v1.1</span><span>JAON 인태리 · <span class="no">11</span></span></div>
+</div></section>
+
+<!-- ===== 12 사인 상세 사양 ===== -->
+<section class="slide" id="s12"><div class="in">
+  <div class="kicker">Ⅲ · Sign Schedule</div>
+  <h2>사인 상세 사양 — 판을 오려 겹쳐 만든 두께가 이 간판의 재질입니다</h2>
+  <table class="lg" style="flex:0 0 auto">
+    <tr><th style="width:3%">#</th><th style="width:13%">요소</th><th style="width:15%">크기 (≈, 실측 전)</th><th style="width:30%">형식 · 재질</th><th style="width:22%">고정</th><th>비고</th></tr>
+    <tr><td>①</td><td>게이트 기둥 ×2</td><td>높이 ≈4.0m, ㄱ자 팔 ≈0.6~0.8m</td><td>각관 + 노랑 도장 (규격·도장 사양 업체 확인)</td><td>기존 모서리 기둥 커버 우선 검토</td><td>오른쪽 기둥은 옆 간판 앞</td></tr>
+    <tr><td>②</td><td>물결 상호 띠</td><td>≈6.8 × 0.7m</td><td>알루미늄 복합판(ACM) 3겹 CNC 컷 + UV 출력·코팅, 겹 띄움 ≈2~3cm, 측면 ≈10cm 먹색</td><td>띠 뒤 각파이프 틀 → 정면 보</td><td>가장 큰 면 — 구조 검토</td></tr>
+    <tr><td>③</td><td>입체 상호</td><td>글자 ≈0.68m (띠 위 ≈+0.08) · 폭 장자도 ≈2.2 · 장사 ≈1.5m</td><td>페이퍼로지 9 Black · 노랑 면 + 갈색→에스프레소 두께 + 남색 키라인. 두께는 실제 측면 또는 판 겹침 — 업체 제안</td><td>띠 앞판 (틀에서 받침)</td><td>글꼴 SIL OFL 1.1 (간판 사용 가능) · 테두리 들뜸 점검</td></tr>
+    <tr><td>④</td><td>서브 띠</td><td>≈6.8 × 0.22m · 글자 ≈0.15m</td><td>구운 갈색 판 + 버터 노랑 글자(에스프레소 두께)</td><td>띠 틀 하단</td><td>문구 그대로 · "버터구이" 키우는 안 보류</td></tr>
+    <tr><td>⑤</td><td>캐릭터 판 ×3</td><td>장사 ≈1.4×1.1 · 조수 각 ≈1.0×1.0m (+15%)</td><td>ACM CNC + UV 출력, 흰 외곽 테두리 ≈40~50mm, 측면 ≈5cm·뒷면 먹색</td><td>캐릭터당 세로 각파이프 2 → 두 점</td><td>떠 있는 조각 없음(검수 완료)</td></tr>
+    <tr><td>⑥</td><td>철판 · 말풍선</td><td>철판 ≈1.4×0.65 · '영차!' ≈Ø0.55m</td><td>⑤와 같은 공정 · 철판은 상호와 같은 두께·키라인</td><td>철판은 상호 사이 띠 앞판, 원은 장사 판 테두리에 붙여 한 판</td><td>장사 턱과 겹침 폭 업체 확인</td></tr>
+    <tr><td>⑦</td><td>초가 처마</td><td>≈6.8 × 0.35m</td><td>방염 인조 초가 (진짜 짚 X)</td><td>서브 띠 아래 레일, 교체식</td><td>방염 성적서 확인</td></tr>
+    <tr><td>⑧</td><td>전구 줄</td><td>처마 안쪽 폭 전체</td><td>옥외 LED 전구 ≈2700K</td><td>처마 틀 안쪽 와이어</td><td>전용 회로·누전차단기 — 전기업체</td></tr>
+    <tr><td>⑨</td><td>세로 메뉴판</td><td>≈0.6 × 1.7m</td><td>먹색 판 + 노랑 글자 + 음식 사진, 뒤는 나무결 판벽</td><td>왼쪽 기둥 옆 벽면</td><td>문구는 메뉴 확정 후</td></tr>
+    <tr><td>⑩</td><td>메뉴 입간판</td><td>≈0.85 × 1.7m</td><td>먹색 판 + 구명튜브 장식</td><td>바닥 추, 대지 안</td><td>태풍 때 실내로</td></tr>
+  </table>
+  <p class="s" style="margin-top:.8cqw">크기는 <span data-round>14라운드 A안</span> 근경 합성에서 물결 띠(≈6.8m)를 잣대로 잰 비례값입니다. 판 두께·최소 컷 폭·코팅 종류는 업체 확인 항목입니다.</p>
+  <div class="foot"><span>장자도 장사 · 간판·사인 디자인 제안서 v1.1</span><span>JAON 인태리 · <span class="no">12</span></span></div>
+</div></section>
+
+<!-- ===== 13 컬러 · 자재 ===== -->
+<section class="slide" id="s13"><div class="in">
+  <div class="kicker">Ⅲ · Color &amp; Material</div>
+  <h2>노랑과 바다 남색이 뼈대, 구운 갈색이 '버터구이'를 말합니다</h2>
+  <div style="display:grid;grid-template-columns:repeat(9,1fr);gap:.8cqw;flex:0 0 auto">
+    <div class="chip"><i style="background:#FFCC26"></i><span><b>노랑</b> 기둥·상호 면<br>#FFCC26</span></div>
+    <div class="chip"><i style="background:linear-gradient(90deg,#562B10,#2E1608)"></i><span><b>상호 두께</b> 짙은 갈색→에스프레소<br>#562B10→#2E1608</span></div>
+    <div class="chip"><i style="background:#09255B"></i><span><b>바다 남색</b> 키라인·물결<br>#09255B</span></div>
+    <div class="chip"><i style="background:#7C401A"></i><span><b>구운 갈색</b> 서브 띠<br>#7C401A</span></div>
+    <div class="chip"><i style="background:#FFD654"></i><span><b>버터 노랑</b> 서브 글자<br>#FFD654</span></div>
+    <div class="chip"><i style="background:#2C6FB8"></i><span><b>물결 파랑</b><br>#2C6FB8</span></div>
+    <div class="chip"><i style="background:#4FB7B5"></i><span><b>물결 민트</b><br>#4FB7B5</span></div>
+    <div class="chip"><i style="background:#EAF6FA"></i><span><b>물거품 흰</b><br>#EAF6FA</span></div>
+    <div class="chip"><i style="background:#1D1F22"></i><span><b>먹색</b> 메뉴판·판 측면<br>#1D1F22</span></div>
+  </div>
+  <p class="s" style="margin:.6cqw 0 1.2cqw">상호·서브 띠 색은 14라운드 시안 제작값(사진 명도를 입히기 전), 물결 색은 시안에서 읽은 대략값입니다. 출력 전 업체 색 견본(실물 칩)으로 확정합니다. 캐릭터 색(머리띠 빨강·조수 갈색)과 초가는 시트 원본·자재 실물 기준.</p>
+  <div class="grid g2" style="align-items:start">
+    <table>
+      <tr><th style="width:30%">자재</th><th>쓰는 곳 · 이유</th></tr>
+      <tr><td>알루미늄 복합판 (ACM)</td><td>물결 띠·캐릭터·철판·말풍선. CNC로 자유 곡선 컷, 가볍고 녹이 안 남. 두께는 통상 3~4mm 계열 — 업체 확인</td></tr>
+      <tr><td>UV 평판 출력 + 코팅</td><td>판 위 그림. 바닷가 햇빛 퇴색 대비 코팅 종류·보증 기간 업체 확인</td></tr>
+      <tr><td>각관 (도장)</td><td>기둥·띠 틀·캐릭터 지지대. 도장 사양(염해) 업체 확인</td></tr>
+    </table>
+    <table>
+      <tr><th style="width:30%">자재</th><th>쓰는 곳 · 이유</th></tr>
+      <tr><td>스텐 볼트 + 절연 와셔</td><td>모든 체결부. 이종금속 부식 방지</td></tr>
+      <tr><td>방염 인조 초가</td><td>처마. 철판 화기·바닷바람 — 진짜 짚 대신</td></tr>
+      <tr><td>옥외 LED 전구 · 먹색 판</td><td>전구 줄 ≈2700K, 메뉴판·판 뒷면/측면 먹색 통일 (서브 띠는 14라운드부터 구운 갈색)</td></tr>
+    </table>
+  </div>
+  <div class="foot"><span>장자도 장사 · 간판·사인 디자인 제안서 v1.1</span><span>JAON 인태리 · <span class="no">13</span></span></div>
+</div></section>
+
+<!-- ===== 14 원거리 가독성 ===== -->
+<section class="slide" id="s14"><div class="in">
+  <div class="kicker">Ⅲ · Legibility</div>
+  <h2>30m 밖에서는 얼굴이 아니라 실루엣이, 다가오면 글자가 일합니다</h2>
+  <div class="grid g46">
+    <div style="display:flex;flex-direction:column;gap:1cqw">
+      <figure class="fig contain" style="flex:0 0 auto"><img data-k="far" src="./간판시안/14라운드/jangjado-sign14-gate-A-far300.jpg" alt="원거리 테스트" style="height:auto;object-fit:contain;background:#fff"><figcaption>원거리 대용 테스트 — 전경을 가로 300px로 줄인 것(m 환산 아님). <span data-round>14라운드 A안</span> 기준.</figcaption></figure>
+      <div class="note">이 크기에서 <b>상호 "장자도 장사"가 읽힙니다</b>(9라운드 흰 글자는 물결에 묻혀 흐렸음). 요리사와 갈색 친구 둘, 가운데 어두운 철판 덩어리까지 보이고, 서브 띠 글자는 못 읽습니다 — 정체는 다가오면서 서브 띠와 메뉴판이 말합니다.</div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:1cqw">
+      <table>
+        <tr><th>요소</th><th>크기 ≈</th><th>읽히는 거리 ≈</th></tr>
+        <tr><td>상호 "장자도 장사"</td><td>글자 0.68m</td><td>≈80m</td></tr>
+        <tr><td>철판 덩어리 (상호 사이)</td><td>0.65m</td><td>≈78m</td></tr>
+        <tr><td>장사 얼굴 덩어리</td><td>0.5m</td><td>≈60m</td></tr>
+        <tr><td>뒤집개 머리</td><td>0.25m</td><td>≈30m</td></tr>
+        <tr><td>버터(노랑)</td><td>0.2m</td><td>≈24m</td></tr>
+        <tr><td>서브 띠 글자 (지금)</td><td>≈0.15m</td><td>≈18m</td></tr>
+        <tr><td>서브 띠 "갑오징어 버터구이" (제안)</td><td>≈0.22~0.25m</td><td>≈26~30m</td></tr>
+        <tr><td>조수 흰 눈 (둘 같은 크기)</td><td>≈Ø0.12m</td><td>≈14m</td></tr>
+      </table>
+      <p class="s">계산 기준: 간판 업계 통례 "글자 높이 25mm당 ≈3m"(≈크기×120). 글자용 통례라 그림에는 참고로만 씁니다. 출처 <a href="https://www.signs.com/blog/?p=16381">signs.com</a> · <a href="https://signsny.com/resources/distance-visibility/">signsny</a>. 맞은편 주차장까지 거리(≈20~30m)는 사진 추정.</p>
+      <div class="card" style="background:var(--cream)"><h3>보류 옵션 — 서브 띠 위계 <span class="tag g">보류</span></h3><p>상호가 커지면서 원거리 일은 상호와 철판이 맡게 됐습니다. 그래도 "갑오징어"를 20m 밖에서 읽히게 하려면 서브 띠에서 "갑오징어 버터구이"만 띠 높이를 꽉 채우는 안이 남아 있습니다 — 글자만 바뀌어 비용 차이 거의 없음.</p></div>
+    </div>
+  </div>
+  <div class="foot"><span>장자도 장사 · 간판·사인 디자인 제안서 v1.1</span><span>JAON 인태리 · <span class="no">14</span></span></div>
+</div></section>
+
+<!-- ===== 15 개략 예산 ===== -->
+<section class="slide" id="s15"><div class="in">
+  <div class="kicker">Ⅳ · Rough Budget — 개략 · 업체 견적 전</div>
+  <h2>개략 예산 ≈550만~1,450만 원 — 폭이 넓은 건 아직 견적이 없어서입니다</h2>
+  <div class="grid g64">
+    <table>
+      <tr><th style="width:40%">항목</th><th style="width:20%">개략 범위</th><th>성격</th></tr>
+      <tr><td>①② 게이트 기둥·띠 틀·지지대 (각관·도장)</td><td>150~350만</td><td>구조 검토 결과에 따라 가장 크게 움직임</td></tr>
+      <tr><td>②③ 물결 띠 3겹 + 입체 상호</td><td>150~350만</td><td>면적 ≈4.8㎡, 겹 수·측면 마감. 14라운드에서 상호가 ≈1.5배·두께 측면이 생겨 범위 위쪽으로 볼 것</td></tr>
+      <tr><td>⑤⑥ 캐릭터 판 3 + 철판 + 말풍선</td><td>100~300만</td><td>맞춤 조형 성격. 철판 판이 ≈1.4m로 커짐</td></tr>
+      <tr><td>④⑨⑩ 서브 띠 · 세로 메뉴판 · 입간판</td><td>40~120만</td><td>일반 간판 성격</td></tr>
+      <tr><td>⑦⑧ 인조 초가 · LED 전구 줄 · 배선</td><td>30~100만</td><td>전기 공사는 별도 견적</td></tr>
+      <tr><td>설치 (장비·인력·섬 출장)</td><td>50~150만</td><td>장자도 이동·장비 대여 조건 미확인</td></tr>
+      <tr><td>기존 간판 철거·폐기</td><td>20~60만</td><td>임대 조건에 따라 부담 주체 다름</td></tr>
+      <tr><td>신고·허가 수수료 · 구조 검토</td><td>수만~수십만</td><td>지자체·업체마다 다름</td></tr>
+      <tr><th>합계 (부가세 포함 여부 확인)</th><th class="est">≈550만~1,450만</th><th>항목별 금액은 인태리 어림</th></tr>
+    </table>
+    <div style="display:flex;flex-direction:column;gap:1cqw">
+      <div class="card"><h3>근거로 쓴 공개 자료</h3>
+        <p style="font-size:.92cqw">• 간판 제작 건당 평균 90만 원, 25만~220만 (<a href="https://soomgo.com/prices/%EA%B0%84%ED%8C%90-%EC%A0%9C%EC%9E%91">숨고</a>)<br>
+        • 조형물 시공 건당 평균 242만 원, 50만~800만 (<a href="https://soomgo.com/prices/%EC%A1%B0%ED%98%95%EB%AC%BC-%EC%8B%9C%EA%B3%B5">숨고</a>)<br>
+        • 사다리차 대여 건당 평균 30만 원, 9만~45만 (<a href="https://soomgo.com/a.%EC%A0%84%EB%82%A8/%EC%82%AC%EB%8B%A4%EB%A6%AC%EC%B0%A8-%EC%8A%A4%EC%B9%B4%EC%9D%B4%EC%B0%A8-%EB%8C%80%EC%97%AC">숨고</a>)<br>
+        • 옥상간판 허가 수수료 예: 10㎡ 이하 3만5천 원, 초과 ㎡당 5천 원 — 수원시 (<a href="https://www.suwon.go.kr/sw-www/deptHome/dep_city/city08/city08_03/city08_03_04.jsp">수원시</a>, 군산 미확인)</p></div>
+      <div class="note warn">이 간판 같은 대형 맞춤 입체 간판의 ㎡당 단가표는 공개 자료에서 찾지 못했습니다. 항목별 금액은 위 평균과 규모를 비교한 <b>어림</b>이고, 견적 3곳을 받아 좁히는 것이 다음 일입니다.</div>
+      <div class="card"><h3>줄일 수 있는 곳</h3><p style="font-size:.92cqw">기존 기둥 커버(새 기초 X) · 물결 3겹→2겹 · 초가 생략 · 디자인비(시안이 이미 있음)</p></div>
+    </div>
+  </div>
+  <div class="foot"><span>장자도 장사 · 간판·사인 디자인 제안서 v1.1</span><span>JAON 인태리 · <span class="no">15</span></span></div>
+</div></section>
+
+<!-- ===== 16 공정 ===== -->
+<section class="slide" id="s16"><div class="in">
+  <div class="kicker">Ⅳ · Process</div>
+  <h2>확인 → 확정 → 제작·설치. 첫 칸이 열려야 나머지가 움직입니다</h2>
+  <div class="grid g3" style="align-items:stretch">
+    <div class="card" style="font-size:1.25cqw;border-top:.5cqw solid var(--coral)">
+      <div class="num" style="color:var(--coral)">A</div><h3 style="margin-top:.6cqw;font-size:1.6cqw">확인 <span class="tag c">지금</span></h3>
+      <p style="font-size:1.22cqw;line-height:1.75">① 건축물대장 — 가설건축물인지<br>② 군산시 옥외광고물 담당 — 옥상간판 가능 여부·높이 상한<br>③ 전선 — 옆에서 찍은 사진, 필요하면 한전 문의<br>④ 임대 조건 — 원상복구·기존 간판 철거 주체·건물주 동의</p>
+      <p class="s">여기서 막히면 → 17장 후퇴안</p>
+    </div>
+    <div class="card" style="font-size:1.25cqw;border-top:.5cqw solid var(--yellow)">
+      <div class="num" style="color:#b88d00">B</div><h3 style="margin-top:.6cqw;font-size:1.6cqw">확정</h3>
+      <p style="font-size:1.22cqw;line-height:1.75">⑤ 실측 — 정면 폭·지붕 높이·기존 기둥·보 위치<br>⑥ 디자인 확정 — 14라운드 A안(최종·일단) + 남은 미세 옵션(간격·자간·조수 발밑 그림자)<br>⑦ 업체 3곳 견적 + 구조 검토 (19장 요청서)<br>⑧ 업체 제작도 승인 — 치수·두께·고정 상세</p>
+      <p class="s">이 제안서의 ≈치수는 ⑤·⑧에서 확정 치수로 바뀝니다</p>
+    </div>
+    <div class="card" style="font-size:1.25cqw;border-top:.5cqw solid var(--navy)">
+      <div class="num">C</div><h3 style="margin-top:.6cqw;font-size:1.6cqw">제작 · 설치</h3>
+      <p style="font-size:1.22cqw;line-height:1.75">⑨ 표시 허가·신고 (업체 대행 여부 확인)<br>⑩ 공장 제작 — 각관·판 컷·출력<br>⑪ 기존 간판 철거<br>⑫ 현장 설치 — 기둥·틀 → 물결 띠 → 캐릭터 → 처마·전구 → 전기 → 메뉴판<br>⑬ 점검 · 사진 · 유지관리 안내(태풍 때 뗄 것)</p>
+    </div>
+  </div>
+  <p class="s" style="margin-top:1cqw">기간은 적지 않았습니다 — 오픈 목표일과 관청·업체 답을 받은 뒤 칸마다 채웁니다. 발주·계약·업체 연락은 창업주(또는 사장님)가 직접 합니다.</p>
+  <div class="foot"><span>장자도 장사 · 간판·사인 디자인 제안서 v1.1</span><span>JAON 인태리 · <span class="no">16</span></span></div>
+</div></section>
+
+<!-- ===== 17 확인 필요 ===== -->
+<section class="slide" id="s17"><div class="in">
+  <div class="kicker">Ⅳ · Open Issues</div>
+  <h2>확인 필요 — 확정처럼 보이는 그림이지만, 아래는 아직 모릅니다</h2>
+  <table class="lg" style="flex:0 0 auto">
+    <tr><th style="width:17%">항목</th><th style="width:34%">지금 아는 것</th><th style="width:24%">확인할 곳</th><th>막히면</th></tr>
+    <tr><td><b>가설건축물 여부</b></td><td>사진상 컨테이너형 단층. 다른 지자체 안내엔 "가설건축물엔 옥상간판 불가" 예가 있음 (<a href="https://www.yeonsu.go.kr/main/general/part/advertise_rule.asp">연수구</a>)</td><td>건축물대장 · 군산시 건축 담당</td><td>지붕 위 캐릭터를 내리고 띠·기둥만 / 천막형 안전안</td></tr>
+    <tr><td><b>군산 옥상간판 규정</b></td><td>표시 방법 세부는 시·도 조례가 정함 (<a href="https://ko.wikisource.org/wiki/%EC%98%A5%EC%99%B8%EA%B4%91%EA%B3%A0%EB%AC%BC_%EB%93%B1_%EA%B4%80%EB%A6%AC%EB%B2%95">옥외광고물법</a>). 전북·군산 조례 원문은 못 찾음. +1.8m 상한은 타 지자체 예</td><td><a href="https://www.law.go.kr">국가법령정보센터</a> 자치법규 · 군산시 옥외광고 담당</td><td>상한에 맞춰 캐릭터 셋을 함께 축소 (14라운드부터 장사 ≈+1.3~1.4 · 조수 ≈+1.27로 셋이 거의 같은 높이)</td></tr>
+    <tr><td><b>지붕 위 전선</b></td><td><span class="est">합성 시안에서 전선을 지웠습니다.</span> 실물은 왼쪽 위에서 내려와 오른쪽 지붕 모서리에 물림(사진 추정) — 지붕 위 작업의 첫 관문</td><td>옆에서 찍은 사진 · 한전</td><td>오른쪽 후추 조수 위치·높이 조정</td></tr>
+    <tr><td><b>실측</b></td><td>모든 치수는 사진·합성 비례 추정(≈)</td><td>현장 실측 (업체 방문 시)</td><td>—</td></tr>
+    <tr><td><b>공작물 축조신고</b></td><td>높이 4m 넘는 광고판은 축조신고 대상 (<a href="https://korea.legal/wiki/%ea%b1%b4%ec%b6%95%eb%b2%95-%ec%8b%9c%ed%96%89%eb%a0%b9-%ec%a0%9c118%ec%a1%b0/">건축법 시행령 118조</a>). 게이트 높이 ≈4.0m 안팎</td><td>군산시 건축 담당</td><td>높이 조정 또는 신고</td></tr>
+    <tr><td><b>구조 · 바람</b></td><td>하중 계산 안 함. 고정 방식만 설계</td><td>간판 업체 구조 검토</td><td>부재 보강 · 판 축소</td></tr>
+    <tr><td><b>전기 · 방염</b></td><td>전구 줄 회로 · 초가 방염 성적서</td><td>전기 업체 · 자재 업체</td><td>—</td></tr>
+    <tr><td><b>임대 조건</b></td><td>원상복구 범위 · 기존 간판 철거 주체 · 건물주 동의</td><td>임대 계약서 · 건물주</td><td>탈착식 범위 늘리기</td></tr>
+  </table>
+  <div class="foot"><span>장자도 장사 · 간판·사인 디자인 제안서 v1.1</span><span>JAON 인태리 · <span class="no">17</span></span></div>
+</div></section>
+
+<!-- ===== 18 다음 단계 ===== -->
+<section class="slide" id="s18"><div class="in">
+  <div class="kicker">Ⅳ · Next Phase — Interior</div>
+  <h2>다음 단계 — 내부는 아직 그리지 않았습니다. 먼저 정할 것만 적습니다</h2>
+  <div class="grid g3" style="align-items:start">
+    <div class="card"><h3>1. 줄과 포장</h3><p>줄은 가게 앞인가 옆인가 · 주문·결제 자리 · 포장 받는 자리. 정면이 다 열리는 구조라 <b>줄과 통행이 겹치지 않게</b>가 첫 번째.</p></div>
+    <div class="card"><h3>2. 철판과 배기</h3><p>기존 스텐 조리대를 쓰는지 · 철판 열원(전기/가스) · 연기가 어디로 나가는지. <b>배기가 처마·초가 쪽으로 가면 간판 재질에도 영향</b>.</p></div>
+    <div class="card"><h3>3. 전기 · 가스 용량</h3><p>철판·냉장·조명·전구 줄을 한 번에 쓸 때 용량. 증설·가스는 전문 업체 확인.</p></div>
+    <div class="card"><h3>4. 보관</h3><p>갑오징어·버터 냉장, 포장재 재고를 어디에 두는가.</p></div>
+    <div class="card"><h3>5. 손님 자리</h3><p>포장 전용인가, 서서 먹는 선반이 있는가.</p></div>
+    <div class="card"><h3>6. 내부 톤 · 메뉴 · 포장</h3><p>간판 색(노랑·남색·먹)을 안으로 이을지 · 메뉴판 문구·가격 · 포장 용기(갑오징어 뼈 → 종이배 아이디어).</p></div>
+  </div>
+  <div class="note" style="margin-top:1.2cqw">이 단계에 필요한 것: <b>내부 사진 · 실측 · 오픈 목표일 · 내부 예산 범위</b>. 받으면 평면·동선 스케치부터 시작합니다.</div>
+  <div class="foot"><span>장자도 장사 · 간판·사인 디자인 제안서 v1.1</span><span>JAON 인태리 · <span class="no">18</span></span></div>
+</div></section>
+
+<!-- ===== 19 견적 요청서 ===== -->
+<section class="slide" id="s19"><div class="in">
+  <div class="kicker">Ⅳ · RFQ Draft</div>
+  <h2>업체 견적 요청서 (초안) — 보내는 건 창업주가 직접 합니다</h2>
+  <div class="grid g2">
+    <div class="card" style="font-size:1.2cqw;line-height:1.75;white-space:pre-line;background:#fff">안녕하세요. 군산 장자도 호떡마을 옆 가게 간판 견적을 요청드립니다.
+<b>현장</b> 군산시 옥도면 장자도 (단층 가건물, 정면 ≈6.5~6.8m)
+<b>첨부</b> 디자인 제안서 · 합성 시안 · 캐릭터 원본 파일
+<b>범위</b> 게이트 기둥 2 · 물결 띠 3겹 + 입체 상호(두께 측면) · 서브 띠 · 철판 판 · 캐릭터 판 3 · 말풍선 · 인조 초가 처마 · LED 전구 줄 · 세로 메뉴판 · 입간판 · 기존 간판 철거
+<b>조건</b> 지붕에 구멍·하중 없이 고정 희망, 바닷가(스텐 체결)
+현장 실측 방문이 가능한지, 아래 항목별로 나눈 견적을 부탁드립니다.</div>
+    <div class="card">
+      <h3>함께 물어볼 것</h3>
+      <ul style="font-size:1.2cqw;line-height:1.9">
+        <li style="font-size:1.15cqw">항목별 금액 · 부가세 포함 여부 · 디자인비 제외 가능 여부</li>
+        <li style="font-size:1.15cqw">구조 검토(바람 하중) 포함 여부, 기존 기둥 활용 가능성</li>
+        <li style="font-size:1.15cqw">가설건축물 옥상간판 · 군산 허가·신고 대행 여부와 비용</li>
+        <li style="font-size:1.15cqw">판 두께 · 최소 컷 폭 · 상호 두께(측면) 내는 방식 · 출력 코팅과 퇴색 보증 기간</li>
+        <li style="font-size:1.15cqw">섬 출장비 · 장비(스카이차 등) · 설치 소요 일수</li>
+        <li style="font-size:1.15cqw">제작 기간 · A/S 범위 · 태풍 때 탈착 서비스</li>
+        <li style="font-size:1.15cqw">전선 근처 작업 가능 여부 · 한전 협의 필요성</li>
+        <li style="font-size:1.15cqw">철거 · 폐기 포함 여부</li>
+      </ul>
+      <p class="s" style="margin-top:.6cqw">견적은 3곳 이상 · 같은 범위표로 받아야 비교가 됩니다.</p>
+    </div>
+  </div>
+  <div class="foot"><span>장자도 장사 · 간판·사인 디자인 제안서 v1.1</span><span>JAON 인태리 · <span class="no">19</span></span></div>
+</div></section>
+
+<!-- ===== 20 출처 · 문서 정보 ===== -->
+<section class="slide div" id="s20"><div class="in" style="justify-content:space-between">
+  <div>
+    <div class="kicker" style="color:var(--yellow)">Sources &amp; Document Info</div>
+    <h2 style="font-size:3cqw">다음 판은 실측과 업체 견적으로 갑니다</h2>
+  </div>
+  <img data-k="close" src="./간판시안/14라운드/jangjado-sign14-gate-A-closeup.jpg" alt="확정 시안" style="height:24cqw;width:auto;align-self:flex-start;border-radius:.5cqw;border:.2cqw solid rgba(255,255,255,.25)">
+  <div class="grid g2" style="flex:0 0 auto;gap:3cqw">
+    <div style="color:#cfd8ea;font-size:.92cqw;line-height:1.7">
+      <b style="color:#fff">문서</b><br>
+      장자도 장사 간판·사인 디자인 제안서 v1.1 · 2026.10.13 (14라운드 반영) · JAON 인태리<br>
+      시안: 미지(합성) · 설계·검수: 인태리 · 캐릭터 정본: 캐릭터/4라운드<br>
+      대표·근경 투시도 = <span data-round>14라운드 A안</span> (10-13 사장님 "일단 이정도로": 9라운드 배치 위에 페이퍼로지 9 노랑 입체 상호 띠 위 돌출, 철판을 상호 두 단어 사이 같은 깊이로, 구운 갈색 서브 띠, 조수 둘 대칭 +15%)<br><br>
+      <b style="color:#fff">이 문서의 한계</b><br>
+      치수 전부 추정(≈) · 예산 개략(견적 전) · 법규 미확인 · 시안에서 전선 지움
+    </div>
+    <div style="color:#cfd8ea;font-size:.82cqw;line-height:1.7">
+      <b style="color:#fff">출처</b><br>
+      속초관광수산시장 제2문 — <a style="color:#F2C230" href="https://commons.wikimedia.org/wiki/File:Sokcho_Central_Market_01.jpg">Wikimedia Commons</a><br>
+      가독성 통례 — <a style="color:#F2C230" href="https://www.signs.com/blog/?p=16381">signs.com</a> · <a style="color:#F2C230" href="https://signsny.com/resources/distance-visibility/">signsny</a><br>
+      비용 참고 — <a style="color:#F2C230" href="https://soomgo.com/prices/%EA%B0%84%ED%8C%90-%EC%A0%9C%EC%9E%91">숨고 간판 제작</a> · <a style="color:#F2C230" href="https://soomgo.com/prices/%EC%A1%B0%ED%98%95%EB%AC%BC-%EC%8B%9C%EA%B3%B5">숨고 조형물 시공</a> · <a style="color:#F2C230" href="https://soomgo.com/a.%EC%A0%84%EB%82%A8/%EC%82%AC%EB%8B%A4%EB%A6%AC%EC%B0%A8-%EC%8A%A4%EC%B9%B4%EC%9D%B4%EC%B0%A8-%EB%8C%80%EC%97%AC">숨고 사다리차</a><br>
+      법규 참고 — <a style="color:#F2C230" href="https://www.yeonsu.go.kr/main/general/part/advertise_rule.asp">연수구 옥외광고물 안내</a> · <a style="color:#F2C230" href="https://www.suwon.go.kr/sw-www/deptHome/dep_city/city08/city08_03/city08_03_04.jsp">수원시 수수료</a> · <a style="color:#F2C230" href="https://korea.legal/wiki/%ea%b1%b4%ec%b6%95%eb%b2%95-%ec%8b%9c%ed%96%89%eb%a0%b9-%ec%a0%9c118%ec%a1%b0/">건축법 시행령 118조</a> · <a style="color:#F2C230" href="https://ko.wikisource.org/wiki/%EC%98%A5%EC%99%B8%EA%B4%91%EA%B3%A0%EB%AC%BC_%EB%93%B1_%EA%B4%80%EB%A6%AC%EB%B2%95">옥외광고물법</a><br>
+      지난 설계 문서 — 인태리/간판설계-천막·게이트 · 게이트-캐릭터배치 · 검수-8라운드 · 라운드별 수치는 미지 일지(10~14라운드)
+    </div>
+  </div>
+  <div class="foot" style="color:#7f8fb0"><span>장자도 장사 · 간판·사인 디자인 제안서 v1.1</span><span>JAON 인태리 · <span class="no" style="color:#fff">20</span></span></div>
+</div></section>
+
+
+</main>
+<script>
+(function(){
+  document.querySelectorAll('img[data-k]').forEach(function(el){
+    var p = IMG[el.dataset.k]; if(!p) return;
+    // 10-13 폰(웹관제판, http)에서는 상대경로·file://가 안 열려서 서버의 /f?p= 로 받는다
+    if (false) { // 웹 공개본: 이미지가 같은 폴더에 있으므로 /f?p= 를 쓰지 않는다
+      el.src = '/f?p=' + encodeURIComponent('/Users/mining/JAON/장자도장사/' + p);
+      return;
+    }
+    el.onerror = function(){ if(!el.dataset.abs){ el.dataset.abs = 1; el.src = ABS + p; } };
+    el.src = REL + p;
+  });
+  document.querySelectorAll('[data-round]').forEach(function(el){ el.textContent = ROUND; });
+})();
+</script>
+<script>
+// 10-13 춘봉 · 폰에서 표를 행 카드로 쌓을 때 쓸 머리글 — 첫 행이 전부 th 인 표의 각 td 에 data-th 를 붙인다.
+// 화면에 보이는 건 바꾸지 않는다(속성만). 폰 CSS(#mobile)의 td::before 가 이 값을 읽는다.
+(function(){
+  document.querySelectorAll('table').forEach(function(t){
+    var rows = t.rows; if(!rows.length) return;
+    var head = rows[0].cells, labels = [];
+    for (var i = 0; i < head.length; i++){ if (head[i].tagName !== 'TH') return; labels.push(head[i].textContent.trim()); }
+    for (var r = 1; r < rows.length; r++){
+      var cells = rows[r].cells;
+      for (var c = 0; c < cells.length; c++){ if (cells[c].tagName === 'TD' && labels[c]) cells[c].setAttribute('data-th', labels[c]); }
+    }
+  });
+})();
+</script>
+</body>
+</html>
